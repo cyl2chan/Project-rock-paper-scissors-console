@@ -1,0 +1,113 @@
+//first part of Rock Paper Scissors, final console version
+
+<script>
+
+const arr = ['rock', 'paper', 'scissors'];
+let playerSelection;
+
+function getComputerChoice() {
+  let randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
+function playRound() {
+  computerSelection = getComputerChoice();
+  if (playerSelection === computerSelection) {
+    alert ("It's a tie!");
+  }
+  if ((playerSelection === 'rock') && (computerSelection == 'paper')) {
+    alert('You lose! Paper beats Rock!');
+  }
+  if ((playerSelection === 'paper') && (computerSelection == 'scissors')) {
+    alert('You lose! Scissors beats Paper!');
+  }
+  if ((playerSelection === 'scissors') && (computerSelection == 'rock')) {
+    alert('You lose! Rock beats Scissors!');
+  }
+  
+  if ((computerSelection === 'paper') && (playerSelection === 'scissors')) {
+    alert('You win! Rock beats Paper!');
+  }
+  if ((computerSelection === 'rock') && (playerSelection === 'paper')) {
+    alert('You win! Scissors beats Paper!');
+  }
+  if ((computerSelection === 'scissors') && (playerSelection === 'rock')) {
+    alert('You win! Rock beats Scissors!');
+  }
+}
+
+var currentScorePlayer = 0;
+function addPointPlayer() {
+    currentScorePlayer += 1;
+};
+
+function noPointPlayer() {
+    currentScorePlayer += 0;
+}
+
+var currentScoreComputer = 0;
+function addPointComputer() {
+    currentScoreComputer += 1;
+};
+
+function noPointComputer() {
+    currentScoreComputer += 0;
+}
+
+
+function addPoint() {
+    if (playerSelection === computerSelection) {
+        noPointComputer();
+        noPointPlayer();
+    } else if (playerSelection === 'rock' && computerSelection === 'paper'){
+        addPointComputer();
+        noPointPlayer();
+    } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+        addPointComputer();
+        noPointPlayer();
+    } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+        addPointComputer();
+        noPointPlayer();
+    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        addPointPlayer();
+        noPointComputer();
+    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        addPointPlayer();
+        noPointComputer();
+    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        addPointPlayer();
+        noPointComputer();
+    } else (console.log('Error in if else statement of addPointComputer() & addPointPlayer()!!'))
+}
+
+function displayResults() {
+    if (currentScorePlayer > currentScoreComputer) {
+        console.log('You are the winner! You have saved the world!\n' + 
+        'Score: \n You - ' + currentScorePlayer + '\n Monster - ' + currentScoreComputer);
+    };
+
+    if (currentScoreComputer > currentScorePlayer) {
+        console.log('The monster is the winner! The world is doomed!\n' + 
+        'Score: \n You - ' + currentScorePlayer + '\n Monster - ' + currentScoreComputer);
+    };
+
+    if (currentScorePlayer === currentScoreComputer) {
+        console.log('It is a tie! Play again!\n' + 
+        'Score: \n You - ' + currentScorePlayer + '\n Monster - ' + currentScoreComputer);
+    };
+}
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt('Input: rock, paper, or scissors').toLowerCase();
+        playRound();
+        addPoint();
+    }
+    displayResults();
+}
+
+game();
+
+
+
+</script>
